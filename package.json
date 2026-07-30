@@ -1,0 +1,30 @@
+{
+  "name": "brett-on-hood",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Brett on Hood — landing page. Brett, on Robinhood Chain.",
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint",
+    "gen:assets": "node scripts/gen-assets.mjs"
+  },
+  "dependencies": {
+    "@types/three": "^0.185.1",
+    "motion": "^12.43.0",
+    "next": "^16.2.12",
+    "react": "^19.2.8",
+    "react-dom": "^19.2.8",
+    "three": "^0.185.1"
+  },
+  "devDependencies": {
+    "@tailwindcss/postcss": "^4.3.3",
+    "@types/node": "^22.10.2",
+    "@types/react": "^19.2.0",
+    "@types/react-dom": "^19.2.0",
+    "sharp": "^0.34.2",
+    "tailwindcss": "^4.3.3",
+    "typescript": "^5.7.2"
+  }
+}
