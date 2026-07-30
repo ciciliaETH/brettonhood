@@ -1,31 +1,42 @@
-# Brand artwork — drop the four files here
+# Brand artwork
 
-Filenames must match **exactly**. The site reads them from `lib/site-config.ts`.
+Filenames are read from `lib/site-config.ts` (`art`), so they must match exactly.
 
-| Filename | What it is | Ideal size |
+| File | What it is | Source |
 |---|---|---|
-| `brett-logo.png` | Square Brett-head PFP on lime | 1600×1600 |
-| `brett-casino.png` | Tuxedo Brett at the craps table with the crew | 1600×1600 |
-| `brett-peaky.png` | Peaky Blinders Brett, flat cap, Robinhood feather pin | 1600×1600 |
-| `brett-banner.png` | The "Brett" script banner | 1500×500 |
+| `brett-logo.png` | HD square mark, 1254×1254 | supplied |
+| `brett-logo.svg` | Vector mark, 284 paths, transparent | supplied trace, background plate stripped + viewBox added |
+| `brett-banner.png` | 1500×500 banner | recovered from the Telegram channel |
+| `brett-face.png` | 1024×1024 transparent render of the SVG | **generated** — `npm run gen:assets` |
 
-## ⚠️ `brett-logo.png` is currently a 320×320 placeholder
+`brett-face.png` is the texture printed on the front of the WebGL 3D Brett. It
+has to be transparent, which is why it's rasterised from the SVG rather than
+reusing `brett-logo.png` (that has the lime plate baked in). Don't hand-edit it —
+regenerate it.
 
-It was pulled from the Telegram channel avatar so the site renders and the OG
-card generates before the real art lands. **Replace it with the 1600×1600
-original** — at 320px it will look soft in the hero.
+## Optional extras
 
-## Missing files don't break anything
+These aren't required and nothing renders a placeholder without them, but if you
+add them the site can use the original artwork instead of vector stand-ins:
 
-Any file that isn't here renders as a labelled dashed placeholder block of the
-correct aspect ratio (see `components/ui/FramedImage.tsx`), so you can build and
-review the whole page before the art is final.
+| File | Would be used for |
+|---|---|
+| `brett-casino.png` | the craps-table scene behind the "house always wins" band |
+| `brett-peaky.png` | the flat-cap portrait in "Getting In" |
 
-## After adding or replacing files
+Right now both of those sections are built from the vector mark plus CSS/SVG
+scenery, so they render correctly with no missing assets.
+
+## Missing files don't break the layout
+
+`components/ui/FramedImage.tsx` swaps any file it can't load for a labelled
+dashed block of the same aspect ratio.
+
+## After changing `brett-logo.png` or `brett-logo.svg`
 
 ```bash
 npm run gen:assets
 ```
 
-Regenerates `favicon.ico`, `favicon-32x32.png`, `apple-touch-icon.png` and
-`og-image.png` from `brett-logo.png`.
+Regenerates `favicon.ico`, `favicon-32x32.png`, `apple-touch-icon.png`,
+`og-image.png` and `brett-face.png`.

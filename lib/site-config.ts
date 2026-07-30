@@ -22,8 +22,8 @@ export const site = {
   tagline: "Brett went legit. Brett moved to the hood.",
   description:
     "Brett on Hood — the legendary Matt Furie frog took his seat at the table on Robinhood Chain. Gas in ETH, chain ID 4663, zero tax.",
-  /** Set this once you have the domain — used for canonical + OG URLs. */
-  url: "https://brettonhood.com",
+  /** Drives metadataBase, the canonical link, and the absolute OG image URL. */
+  url: "https://brettonhood.space",
   locale: "en_US",
 } as const;
 
@@ -32,13 +32,18 @@ export const token = {
   ticker: "$BRETT" as string,
   /** Full contract address, 0x… */
   contract: "0x76A0355d6b8B0D549a0838EC652EB487097049bE" as string,
-  totalSupply: TBA as string,
+  /** Read off-chain from the contract: totalSupply() / 1e18. */
+  totalSupply: "1,000,000,000" as string,
+  /**
+   * Not yet verified — do NOT publish a number here until someone has actually
+   * read the transfer path. Claiming "0%" unverified is how sites mislead people.
+   */
   buyTax: TBA as string,
   sellTax: TBA as string,
   /** e.g. "Locked" / "Burned" */
   liquidity: TBA as string,
-  /** e.g. "Renounced" */
-  ownership: TBA as string,
+  /** The contract exposes no owner() or getOwner() — there is no admin role. */
+  ownership: "No owner function" as string,
 } as const;
 
 export const links = {
@@ -49,9 +54,9 @@ export const links = {
    * page serves as both chart and swap — so both point there until a
    * DEX-aggregator pair page exists.
    */
-  dexscreener:
+  chart:
     "https://www.ponsfamily.com/launchpad/0x76A0355d6b8B0D549a0838EC652EB487097049bE" as string,
-  uniswap:
+  buy:
     "https://www.ponsfamily.com/launchpad/0x76A0355d6b8B0D549a0838EC652EB487097049bE" as string,
   /** Canonical Arbitrum bridge — how ETH gets onto Robinhood Chain. */
   bridge: "https://bridge.arbitrum.io",

@@ -9,13 +9,15 @@ import { isTBA, token } from "@/lib/site-config";
 export function TickerStrips() {
   const ticker = isTBA(token.ticker) ? "$BRETT" : token.ticker;
 
+  // Only claims that have actually been verified on-chain go in here. "Zero
+  // tax" and "LP locked" are deliberately absent until someone confirms them.
   const top = [
     ticker,
     "Brett on Hood",
     `Chain ID ${ROBINHOOD_CHAIN.chainId}`,
     `Gas in ${ROBINHOOD_CHAIN.nativeCurrency.symbol}`,
-    "Zero tax",
-    "LP locked",
+    "Fixed supply · 1B",
+    "No owner function",
     "Friend of Pepe",
   ];
 

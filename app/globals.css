@@ -73,13 +73,15 @@
     /* Nav is sticky — stop anchor jumps hiding headings behind it. */
     scroll-padding-top: 5.5rem;
     -webkit-text-size-adjust: 100%;
+    /* Needed on html as well as body: the rotated 104vw marquees overflow the
+       root box, and clipping only body still leaves html scrollable. */
+    overflow-x: clip;
   }
 
   body {
     background-color: var(--color-lime);
     color: var(--color-ink);
     font-family: var(--font-body);
-    /* Marquees and bleeding artwork must never scroll the page sideways. */
     overflow-x: clip;
   }
 

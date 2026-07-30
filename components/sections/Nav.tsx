@@ -4,11 +4,10 @@ import { useEffect, useState } from "react";
 import Image from "next/image";
 import { Button } from "@/components/ui/Button";
 import { TelegramIcon, XIcon } from "@/components/ui/Icons";
-import { art, isTBA, links, navLinks, site, token } from "@/lib/site-config";
+import { art, isTBA, links, navLinks, site } from "@/lib/site-config";
 
 export function Nav() {
   const [open, setOpen] = useState(false);
-  const buyLabel = isTBA(token.ticker) ? "Buy" : `Buy ${token.ticker}`;
 
   // Lock body scroll while the mobile sheet is open.
   useEffect(() => {
@@ -32,11 +31,15 @@ export function Nav() {
         {/* Wordmark */}
         <a href="#top" className="flex shrink-0 items-center gap-2.5">
           <span className="grid h-10 w-10 place-items-center overflow-hidden rounded-lg border-[3px] border-ink bg-lime-wash">
+            {/* priority, not just for speed: without it next/image emitted
+                loading="eager" on the server and "lazy" on the client, which
+                tripped a hydration attribute mismatch. */}
             <Image
               src={art.logo}
               alt=""
               width={40}
               height={40}
+              priority
               className="h-full w-full object-cover"
             />
           </span>
@@ -71,15 +74,19 @@ export function Nav() {
           </SocialIcon>
         </div>
 
-        <Button
-          href={isTBA(links.uniswap) ? undefined : links.uniswap}
-          external={!isTBA(links.uniswap)}
-          disabled={isTBA(links.uniswap)}
-          variant="ink"
-          className="hidden sm:inline-flex"
-        >
-          {isTBA(links.uniswap) ? "Buy — soon" : buyLabel}
-        </Button>
+        {/* Wrapped, not classed: Button already sets `inline-flex`, and a
+            `hidden` passed through className loses to it on CSS source order —
+            so the button stayed visible and wrapped onto two lines on mobile. */}
+        <span className="hidden shrink-0 sm:block">
+          <Button
+            href={isTBA(links.buy) ? undefined : links.buy}
+            external={!isTBA(links.buy)}
+            disabled={isTBA(links.buy)}
+            variant="ink"
+          >
+            {isTBA(links.buy) ? "Buy — soon" : "Buy Now"}
+          </Button>
+        </span>
 
         {/* Burger */}
         <button
@@ -135,13 +142,13 @@ export function Nav() {
               <XIcon />
             </SocialIcon>
             <Button
-              href={isTBA(links.uniswap) ? undefined : links.uniswap}
-              external={!isTBA(links.uniswap)}
-              disabled={isTBA(links.uniswap)}
+              href={isTBA(links.buy) ? undefined : links.buy}
+              external={!isTBA(links.buy)}
+              disabled={isTBA(links.buy)}
               variant="ink"
               className="flex-1"
             >
-              {isTBA(links.uniswap) ? "Buy — soon" : buyLabel}
+              {isTBA(links.buy) ? "Buy — soon" : "Buy Now"}
             </Button>
           </div>
         </div>

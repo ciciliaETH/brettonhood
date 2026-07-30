@@ -77,25 +77,27 @@ export function GettingIn() {
             </Step>
 
             {/* 3 — swap */}
-            <Step index={3} title={`Swap for ${ticker}`} delay={0.12}>
+            <Step index={3} title={`Buy ${ticker}`} delay={0.12}>
               <p>
-                Uniswap has been live on the chain since day one. Paste the contract below —
-                always paste it, never search by name.
+                {ticker}{" "}
+                launched on the Pons Family launchpad — buy and chart live on the same pad
+                page. Always match the contract below, never search by name.
               </p>
 
               <CopyPill value={token.contract} label="Contract" tone="dark" className="mt-4 w-full" />
-              {isTBA(links.uniswap) ? (
+
+              {isTBA(links.buy) ? (
                 <p className="mt-4 inline-flex items-center gap-2 rounded-lg border border-lime/40 px-3 py-2 font-mono text-[0.7rem] uppercase tracking-widest text-lime">
                   Pair goes live at launch
                 </p>
               ) : (
                 <a
-                  href={links.uniswap}
+                  href={links.buy}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="mt-4 inline-flex items-center gap-1.5 font-mono text-sm text-lime underline decoration-lime/40 underline-offset-4 hover:text-lime hover:decoration-lime"
                 >
-                  Swap on Uniswap ↗
+                  Open on Pons ↗
                 </a>
               )}
             </Step>

@@ -1,6 +1,7 @@
 import { Button } from "@/components/ui/Button";
 import { CopyPill } from "@/components/ui/CopyPill";
 import { TelegramIcon, XIcon } from "@/components/ui/Icons";
+import { Wordmark3D } from "@/components/ui/Wordmark3D";
 import { ROBINHOOD_CHAIN } from "@/lib/chain";
 import { isTBA, links, navLinks, site, token } from "@/lib/site-config";
 
@@ -25,14 +26,14 @@ export function Footer() {
 
           <div className="flex shrink-0 flex-wrap items-center gap-4">
             <Button
-              href={isTBA(links.uniswap) ? undefined : links.uniswap}
-              external={!isTBA(links.uniswap)}
-              disabled={isTBA(links.uniswap)}
+              href={isTBA(links.buy) ? undefined : links.buy}
+              external={!isTBA(links.buy)}
+              disabled={isTBA(links.buy)}
               variant="lime"
               size="lg"
               onDark
             >
-              {isTBA(links.uniswap) ? "Buy — soon" : `Buy ${ticker}`}
+              {isTBA(links.buy) ? "Buy — soon" : "Buy Now"}
             </Button>
             <a
               href={links.telegram}
@@ -112,14 +113,12 @@ export function Footer() {
         </p>
       </div>
 
-      {/* Oversized wordmark bleeding off the bottom. Outline only — a low-alpha
-          lime FILL over dark green muddies into olive. */}
-      <p
-        aria-hidden
-        className="display-xl pointer-events-none mt-12 w-full text-center text-[19vw] leading-[0.72] text-transparent select-none [-webkit-text-stroke:2px_rgba(200,253,0,0.16)]"
-      >
-        Brett on Hood
-      </p>
+      {/* Oversized wordmark bleeding off the bottom, extruded into real 3D and
+          tilted by scroll position. */}
+      <Wordmark3D
+        lines={["Brett", "on Hood"]}
+        className="pointer-events-none mt-14 w-full text-[17vw] select-none sm:text-[15vw]"
+      />
     </footer>
   );
 }

@@ -68,18 +68,18 @@ export function Hero() {
 
           <Reveal delay={0.18} className="mt-8 flex flex-wrap items-center gap-4">
             <Button
-              href={isTBA(links.uniswap) ? undefined : links.uniswap}
-              external={!isTBA(links.uniswap)}
-              disabled={isTBA(links.uniswap)}
+              href={isTBA(links.buy) ? undefined : links.buy}
+              external={!isTBA(links.buy)}
+              disabled={isTBA(links.buy)}
               variant="ink"
               size="lg"
             >
-              {isTBA(links.uniswap) ? `${ticker} — Dropping soon` : `Buy ${ticker}`}
+              {isTBA(links.buy) ? `${ticker} — Dropping soon` : "Buy Now"}
             </Button>
             <Button
-              href={isTBA(links.dexscreener) ? undefined : links.dexscreener}
-              external={!isTBA(links.dexscreener)}
-              disabled={isTBA(links.dexscreener)}
+              href={isTBA(links.chart) ? undefined : links.chart}
+              external={!isTBA(links.chart)}
+              disabled={isTBA(links.chart)}
               variant="magenta"
               size="lg"
             >

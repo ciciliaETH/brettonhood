@@ -9,14 +9,10 @@ import { art, links } from "@/lib/site-config";
  * Sticker wall.
  *
  * Rotations are hand-picked and uneven — an even sequence (-3, -1, 1, 3) is a
- * giveaway that a machine laid it out. The vector card offers the SVG, which is
- * the asset people actually want for edits and print.
+ * giveaway that a machine laid it out. The banner gets its own full-width card
+ * at its real 3:1 ratio: cropping a banner into a square tile mangles it, and
+ * the mixed card sizes give the grid a composed rhythm.
  */
-const raster = [
-  { src: art.logo, alt: "Brett on Hood logo", file: "brett-logo.png", rotate: -3.2, label: "The face" },
-  { src: art.banner, alt: "Brett on Hood banner", file: "brett-banner.png", rotate: 2.1, label: "The banner" },
-];
-
 export function MemeWall() {
   return (
     <section id="memes" className="grain relative overflow-hidden bg-lime-wash py-20 sm:py-28">
@@ -32,55 +28,49 @@ export function MemeWall() {
           </p>
         </Reveal>
 
-        <ul className="mt-14 grid grid-cols-2 gap-6 sm:gap-8 lg:grid-cols-4">
-          {raster.map((sticker, i) => (
-            <li key={sticker.file}>
-              <Reveal delay={i * 0.07}>
-                <figure
-                  style={{ rotate: `${sticker.rotate}deg` }}
-                  className="group h-full overflow-hidden rounded-2xl border-[3px] border-ink bg-lime shadow-[9px_9px_0_var(--color-ink)] transition-[rotate,translate,box-shadow] duration-200 ease-out hover:rotate-0 hover:-translate-y-2 hover:shadow-[13px_13px_0_var(--color-magenta)]"
-                >
-                  <div className="aspect-square overflow-hidden border-b-[3px] border-ink bg-lime-wash">
-                    <FramedImage
-                      src={sticker.src}
-                      alt={sticker.alt}
-                      width={800}
-                      height={800}
-                      sizes="(max-width: 1024px) 45vw, 260px"
-                      className="h-full w-full"
-                      imageClassName="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
-                      placeholderLabel={sticker.file}
-                    />
-                  </div>
-                  <Caption label={sticker.label} href={sticker.src} />
-                </figure>
-              </Reveal>
-            </li>
-          ))}
-
-          {/* Vector stickers — always render, scale forever */}
+        {/* Square tiles */}
+        <ul className="mt-14 grid grid-cols-2 gap-6 sm:gap-8 lg:grid-cols-3">
           <li>
-            <Reveal delay={0.14}>
-              <figure className="group h-full overflow-hidden rounded-2xl border-[3px] border-ink bg-lime shadow-[9px_9px_0_var(--color-ink)] transition-[rotate,translate,box-shadow] duration-200 ease-out [rotate:-1.4deg] hover:rotate-0 hover:-translate-y-2 hover:shadow-[13px_13px_0_var(--color-magenta)]">
+            <Reveal>
+              <Card rotate={-3.2}>
                 <div className="aspect-square overflow-hidden border-b-[3px] border-ink bg-lime-wash">
-                  <BrettMark
-                    alt="Brett on Hood vector mark"
-                    className="h-full w-full p-2 transition-transform duration-500 group-hover:scale-105"
+                  <FramedImage
+                    src={art.logo}
+                    alt="Brett on Hood logo"
+                    width={1254}
+                    height={1254}
+                    sizes="(max-width: 1024px) 45vw, 380px"
+                    className="h-full w-full"
+                    imageClassName="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                    placeholderLabel="brett-logo.png"
                   />
                 </div>
-                <Caption label="Vector · SVG" href="/img/brett-logo.svg" />
-              </figure>
+                <Caption label="The face" sub="PNG · 1254px" href={art.logo} />
+              </Card>
             </Reveal>
           </li>
 
-          {/* Bring-your-own card */}
           <li>
-            <Reveal delay={0.21}>
+            <Reveal delay={0.07}>
+              <Card rotate={2.1}>
+                <div className="aspect-square overflow-hidden border-b-[3px] border-ink bg-lime-wash">
+                  <BrettMark
+                    alt="Brett on Hood vector mark"
+                    className="h-full w-full p-3 transition-transform duration-500 group-hover:scale-105"
+                  />
+                </div>
+                <Caption label="Vector" sub="SVG · scales forever" href="/img/brett-logo.svg" />
+              </Card>
+            </Reveal>
+          </li>
+
+          <li className="col-span-2 lg:col-span-1">
+            <Reveal delay={0.14}>
               <a
                 href={links.telegram}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="group flex h-full flex-col items-center justify-center gap-4 rounded-2xl border-[3px] border-dashed border-ink bg-lime px-5 py-10 text-center shadow-[9px_9px_0_var(--color-ink)] transition-[rotate,translate,box-shadow] duration-200 ease-out [rotate:1.8deg] hover:rotate-0 hover:-translate-y-2 hover:border-solid hover:shadow-[13px_13px_0_var(--color-magenta)]"
+                className="group flex h-full min-h-[16rem] flex-col items-center justify-center gap-4 rounded-2xl border-[3px] border-dashed border-ink bg-lime px-5 py-10 text-center shadow-[9px_9px_0_var(--color-ink)] transition-[rotate,translate,box-shadow] duration-200 ease-out rotate-[1.8deg] hover:rotate-0 hover:-translate-y-2 hover:border-solid hover:shadow-[13px_13px_0_var(--color-magenta)]"
               >
                 <span className="grid h-14 w-14 place-items-center rounded-xl border-[3px] border-ink bg-ink text-lime">
                   <TelegramIcon className="h-6 w-6" />
@@ -97,16 +87,53 @@ export function MemeWall() {
             </Reveal>
           </li>
         </ul>
+
+        {/* Banner — full width at its real 3:1 ratio */}
+        <Reveal delay={0.1} className="mt-8">
+          <Card rotate={-1.1}>
+            <div className="overflow-hidden border-b-[3px] border-ink bg-lime-wash">
+              <FramedImage
+                src={art.banner}
+                alt="Brett on Hood banner artwork"
+                width={1500}
+                height={499}
+                sizes="(max-width: 1240px) 92vw, 1160px"
+                className="w-full"
+                imageClassName="h-auto w-full transition-transform duration-500 group-hover:scale-[1.02]"
+                placeholderLabel="brett-banner.png"
+              />
+            </div>
+            <Caption label="The banner" sub="1500 × 500 · for X / TG headers" href={art.banner} />
+          </Card>
+        </Reveal>
       </div>
     </section>
   );
 }
 
-function Caption({ label, href }: { label: string; href?: string }) {
+function Card({ children, rotate }: { children: React.ReactNode; rotate: number }) {
   return (
-    <figcaption className="flex items-center justify-between gap-2 px-3.5 py-3">
-      <span className="font-display text-sm font-extrabold uppercase text-ink sm:text-base">
-        {label}
+    <figure
+      style={{ rotate: `${rotate}deg` }}
+      className="group h-full overflow-hidden rounded-2xl border-[3px] border-ink bg-lime shadow-[9px_9px_0_var(--color-ink)] transition-[rotate,translate,box-shadow] duration-200 ease-out hover:rotate-0 hover:-translate-y-2 hover:shadow-[13px_13px_0_var(--color-magenta)]"
+    >
+      {children}
+    </figure>
+  );
+}
+
+function Caption({ label, sub, href }: { label: string; sub?: string; href?: string }) {
+  return (
+    <figcaption className="flex items-center justify-between gap-3 px-4 py-3">
+      <span className="min-w-0">
+        <span className="block truncate font-display text-sm font-extrabold uppercase text-ink sm:text-base">
+          {label}
+        </span>
+        {sub && (
+          <span className="mt-0.5 block truncate font-mono text-[0.62rem] uppercase tracking-wider text-ink/55">
+            {sub}
+          </span>
+        )}
       </span>
       {href && (
         <a
